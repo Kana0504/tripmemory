@@ -1,0 +1,35 @@
+<h1>Trip</h1>
+<h3>Spot詳細</h3>
+<div class="spot">
+  <p><%= @spot.adress %></p>
+  <p><%= @spot.created_at %></p>
+  <p><%= @spot.time %></p>
+  <p><%= @spot.access %></p>
+  <p><%= @spot.parking %></p>
+  <p><%= @spot.about %></p>
+
+  <% if user_signed_in? %>
+  <% if current_user.already_liked?(@spot) %>
+    <%= link_to spot_like_path(@spot), method: :delete do %>
+        <i class="fas fa-heart"></i><%= @spot.likes.count %>
+    <% end %>
+  <% else %>
+    <%= link_to spot_likes_path(@spot), method: :post do %>
+        <i class="far fa-heart"></i><%= @spot.likes.count %>
+    <% end %>
+  <% end %>
+<% else %>
+<i class="far fa-heart"></i><%= @spot.likes.count %>
+<% end %>
+<%= link_to "編集する", edit_spot_path(@spot.id) %>
+</div>
+
+<h2>いいねしたユーザー</h2>
+<% @spot.liked_users.each do |user| %>
+<li><%= user.email %></li>
+<% end %>
+
+</div>
+
+<%= link_to "Spot一覧に戻る", spots_path %>
+<%= link_to "編集する", edit_spot_path(@spot.id) %>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trip</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    </head>
+
+  <script src="https://kit.fontawesome.com/6269651217.js" crossorigin="anonymous"  crossorigin="anonymous"></script> 
+
+  <body>
+ <header>
+  <h1>Trip</h1>
+
+  <ul>
+  <div class="header-list">
+    <li>
+    </li>
+
+
+
+   <% if user_signed_in? %>
+    <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+   <% else %>
+    <li><%= link_to "新規登録", new_user_registration_path %></li>
+    <li><%= link_to "ログイン", new_user_session_path %></li>
+   <% end %>
+  </ul>
+
+</div>
+
+
+ </header>
+ <main>
+  <%= yield %>
+ </main>
+</body>
+
+
+</div>
+
+
+</html>

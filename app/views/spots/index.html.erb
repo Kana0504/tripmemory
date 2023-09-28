@@ -1,0 +1,80 @@
+<div class="slide">
+<%= image_tag '26737220_s.jpg', class:'icon' %>
+<%= image_tag '27764290_s.jpg', class:'icon' %>
+<%= image_tag '27824723_s.jpg', class:'icon' %>
+</div>
+
+<h3>一覧ページ</h3>
+
+<%= link_to "おすすめスポット", spots_place_path %> 
+<%= link_to "おすすめのご飯", spots_food_path %> 
+<%= link_to "おすすめのお土産", spots_souvenir_path %> 
+
+<h3>投稿を検索</h3>
+ <%= form_tag({controller:"spots",action:"index"}, method: :get) do %>
+   <%= text_field_tag :search %>
+   <%= submit_tag '検索する'  %>
+<% end %>
+
+<%= link_to "新規投稿へ", new_spot_path %>
+
+
+<div class="spots-container">
+  <% @spots.each do |t| %>
+   
+    <div class="spot2">
+  
+       
+        <%= image_tag t.image_url,:class=>"img",  size: "250x200" if t.image? %>    
+     
+ 
+
+        <div class="hyouka">    
+        <h2>総合評価：
+        <span class="star-rating">
+          <span class="star-rating-front" style="width: <%= getPercent(t.overall) %>%;">★★★★★</span>
+          <span class="star-rating-back">★★★★★</span>
+        </span> 
+        </h2>
+        </div>
+
+        <div class="shousai">
+          <%= t.adress %>
+          <%= t.time %>
+          <%= t.access %>
+          <%= t.parking %>
+          <%= t.about %>
+        </div>
+
+        <div class="heart">
+              <% if user_signed_in? %>
+              <% if current_user.already_liked?(t) %>
+              <%= link_to spot_like_path(id: t.id, spot_id: t.id), method: :delete do %>
+                <i class="fas fa-heart"></i><%= t.likes.count %>
+              <% end %>
+              <% else %>
+              <%= link_to spot_likes_path(id: t.id, spot_id: t.id), method: :post do %>
+                <i class="far fa-heart"></i><%= t.likes.count %>
+              <% end %>
+            <% end %>
+            <% else %>
+            <i class="far fa-heart"></i><%= t.likes.count %>
+            <% end %>
+        </div>
+
+        <div class="rink">
+          <%= link_to "詳細へ", spot_path(t.id) %> 
+          <%= link_to "編集する", edit_spot_path(t.id) %>
+          <%= button_to "削除する", spot_path(t.id), method: :delete %>
+         -------------------------------------------------------------------
+         </div>
+
+        
+   
+
+    </div>
+  <% end %>
+
+        
+
+</div>

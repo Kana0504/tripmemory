@@ -1,0 +1,12 @@
+<h1>ご飯</h1>
+<% @spots.each do |t| %>
+  <% if t.category == "food" %>   
+  <%= t.adress %>
+  <%= t.time %>
+  <%= t.access %>
+  <%= t.parking %>
+  <%= t.about %>
+  <br>
+  <%= image_tag t.image_url,:class=>"img", size: "250x200" if t.image? %>
+  <% end %>
+<% end %>

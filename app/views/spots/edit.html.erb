@@ -1,0 +1,32 @@
+<%= form_for @spot do |f| %>
+   
+    <div class="field">
+    <%= f.label :住所 %>
+    <%= f.text_field :adress, :size => 30 %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :営業時間 %>
+    <%= f.text_field :time, :size => 30 %>
+  </div>
+
+
+   <div class="field">
+   <%= f.label :アクセス %>
+   <%= f.text_field :access, :size => 30 %>
+ </div>
+
+
+  <div class="field">
+    <%= f.label :駐車場 %>
+    <%= f.text_field :parking, :size => 30 %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :詳細  %>
+    <%= f.text_area :about, :size => "30x2" %>
+  </div>
+    <%= f.submit "編集する" %>
+  <% end %>
